@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install version="1.5" type="plugin" group="system">
+	<name>System - Crawler Plugin</name>
+	<version>1.0</version>
+	<author>Anshuman Dixit</author>
+	<creationDate>Aprail 04, 2011</creationDate>
+	<copyright></copyright>
+	<license>GNU/GPL</license>
+	<authorEmail>anshuman.dixit@comnez.com</authorEmail>
+	<authorUrl></authorUrl>
+	<description></description>
+	<files>
+		<filename plugin="crawler">crawler.php</filename>
+	</files>
+	<params>
+		
+		<param name="links" type="textarea" default="" label="Links " cols="50" rows="5"  description="Please enter links in this way-http://www.comnez1.com`website builder1,http://www.comnez2.com`website builder2, " />/>
+		
+    </params>
+</install>

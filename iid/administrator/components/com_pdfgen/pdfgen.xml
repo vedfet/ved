@@ -1,0 +1,51 @@
+<?xml version="1.5" encoding="utf-8"?>
+<install type="component" version="1.5.0" method="upgrade">
+    <name>pdfgen</name>
+    <author></author>
+    <creationDate>04/06/2010</creationDate>
+    <license>GNU/GPL</license>
+    <version>2.0</version>
+    <description>The pdfgen component allows the administrator to maintain an pdf gen. </description>
+
+    <!-- installation part -->
+    <install>
+        <queries>
+        </queries>
+    </install>
+
+    <installfile>install.pdfgen.php</installfile>
+    <uninstallfile>uninstall.pdfgen.php</uninstallfile>
+
+    <!-- user part -->
+    <files folder="components/com_pdfgen">
+        <filename>controller.php</filename>
+        <filename>index.html</filename>
+        <filename>pdfgen.php</filename>
+        <folder>models</folder>
+        <folder>views</folder>
+		<folder>images</folder>
+		
+    </files>
+
+    <languages folder="language/en-GB">
+        <language tag="en-GB">en-GB.com_pdfgen.ini</language>
+    </languages>
+
+    <!-- administration part -->
+    <administration>
+
+    <menu task="default" img="js/ThemeOffice/component.png">PDFGen</menu>
+    <submenu>
+       
+    </submenu>
+
+    <files>
+        <filename>pdfgen.xml</filename>
+    </files>
+    </administration>
+
+    <params>
+
+    </params>
+
+</install>

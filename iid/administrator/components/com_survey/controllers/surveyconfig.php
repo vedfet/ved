@@ -1,0 +1,128 @@
+<?php
+/**
+ * Joomla! 1.5 component survey
+ *
+ * @version $Id: survey.php 2010-06-03 01:08:55 svn $
+ * @author Kailash Pathak
+ * @package Joomla
+ * @subpackage survey
+ * @license GNU/GPL
+ *
+ * It creates component for survey
+ *
+ */
+
+defined( '_JEXEC' ) or die( 'Restricted access' );
+
+jimport('joomla.application.component.controller');
+
+
+JLoader::import("survey_configuration",SURVEY_ADMINPATH."/tables/");
+
+class AdminSurveyconfigController extends JController {
+	var $component = null;
+	var $surveyconfigTable = null;
+	var $surveyconfigClassname = null;
+
+	function __construct($config = array())
+	{
+		parent::__construct($config);
+		$this->registerTask( 'edit', 'edit' );
+		$this->registerDefaultTask("edit");
+		$this->component = 	SURVEY_COM_COMPONENT;
+		$this->surveyTable = "#__survey_configuration";
+		$this->surveyClassname = "TableSurvey_configuration";
+		
+	}
+
+	function edit()
+			{
+						$id = JRequest::getVar('id',1);
+						// TODO fix this when database is updated
+						$db =& JFactory::getDBO();		
+						$lists=array();			
+						$surveyconfiglist = new $this->surveyClassname($db);
+						$surveyconfiglist->load($id);
+						
+						
+						$no_of_default_surveys = $this->getno_of_default_surveys();
+						$lists['no_of_default_surveys'] = JHTML::_('select.genericlist',  $no_of_default_surveys, 'no_of_default_surveys', 'size ="1"' , 'value', 'text',$surveyconfiglist->no_of_default_surveys);	
+						$order_by = $this->getorder_by();
+						$lists1['order_by'] = JHTML::_('select.genericlist',  $order_by, 'order_by', 'size ="1"' , 'value', 'text',$surveyconfiglist->order_by);		
+						// get news for parent info
+						// authorised user to select admin
+						$params = JComponentHelper::getParams("com_survey");
+						$this->view = & $this->getView("surveyconfig","html");
+						
+						// Set the layout
+						$this->view->setLayout('edit');
+						$this->view->assign('title', JText::_("Survey Configuration Details"));
+						$this->view->assign('surveyconfiglist', $surveyconfiglist);
+						$this->view->assign('lists',$lists);
+						$this->view->assign('lists1',$lists1);
+						$this->view->assign('conf',$conf);		
+						$this->view->display();
+			}
+	function getno_of_default_surveys()
+	   {
+		$no_of_default_surveys = array();
+		$no_of_default_surveys[] = JHTML::_('select.option', '', JText::_('Select'));
+		$no_of_default_surveys[] = JHTML::_('select.option', '1', JText::_('1'));
+		$no_of_default_surveys[] = JHTML::_('select.option', '2', JText::_('2'));
+		$no_of_default_surveys[] = JHTML::_('select.option', '3', JText::_('3'));
+		return $no_of_default_surveys;
+		}	
+	function getorder_by()
+	   {
+		$order_by = array();
+		$order_by[] = JHTML::_('select.option', '', JText::_('Select'));
+		$order_by[] = JHTML::_('select.option', '1', JText::_('By First Name'));
+		$order_by[] = JHTML::_('select.option', '2', JText::_('By Order'));
+		$order_by[] = JHTML::_('select.option', '3', JText::_('By Date'));
+		return $order_by;
+		}	
+	function save(){
+		
+		$user =& JFactory::getUser();
+        $cid = JRequest::getVar('id',	0 );
+		$id=$_GET['id'];
+		$db	=& JFactory::getDBO();
+		if (strtolower($user->usertype)!="super administrator" && strtolower($user->usertype)!="administrator"){
+			$this->setRedirect( "index.php?option=$this->component&task=cpanel.cpanel", "Not Authorised - must be admin" );
+			return;
+		}
+        $post = JRequest::get('post');
+		$model = $this->getModel('surveyconfig');
+		if($model->save($post)) 
+		{
+			$msg = JText::_('Record Successfully Saved');
+			$this->setRedirect("index.php?option=".SURVEY_COM_COMPONENT."&task=survey.list",$msg);
+		}
+	    else
+		{
+		  	$msg = JText::_('Not able to Saved'); 
+			$this->setRedirect("index.php?option=".SURVEY_COM_COMPONENT."&task=surveyconfig.edit",$msg);
+			
+		}
+	
+	}
+
+
+	function delete(){
+	    $post = JRequest::get('post');
+		$model = $this->getModel('surveyconfig');
+		if($model->delete($post)) 
+		{
+			$msg = JText::_('Record Successfully Deleted');
+			$this->setRedirect("index.php?option=".SURVEY_COM_COMPONENT."&task=survey.list",$msg);
+		}
+	    else
+		{
+		  	$msg = JText::_('Not able to Delete'); 
+			$this->setRedirect("index.php?option=".SURVEY_COM_COMPONENT."&task=surveyconfig.edit",$msg);
+			
+		}
+	}
+	
+
+}

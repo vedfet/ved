@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="homegallery Default Layout">
+		<message>
+			<![CDATA[HOMEGALLERY DEFAULT LAYOUT DESCRIPTION]]>
+		</message>
+	</layout>
+	<state>
+		<name>homegallery Default Layout</name>
+		<description>Homegallery DEFAULT LAYOUT DESCRIPTION</description>
+        <url>
+
+        </url>
+		<params>
+
+		</params>
+		<advanced>
+
+		</advanced>
+	</state>
+</metadata>

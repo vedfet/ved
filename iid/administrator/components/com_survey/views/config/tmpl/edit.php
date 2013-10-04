@@ -1,0 +1,112 @@
+<?php 
+/**
+ * Joomla! 1.5 component survey
+ *
+ * @version $Id: survey.php 2010-06-03 01:08:55 svn $
+ * @author Kailash Pathak
+ * @package Joomla
+ * @subpackage survey
+ * @license GNU/GPL
+ *
+ * It creates component for survey
+ *
+ */
+
+
+// no direct access
+
+defined('_JEXEC') or die('Restricted access');
+ 
+//$cfg = & JPMConfig::getInstance();
+
+$editor =& JFactory::getEditor();
+
+
+?>
+
+<div id="property">
+ 
+ <form enctype="multipart/form-data" action="index.php" method="post" name="adminForm" >
+  <script type="text/javascript" language="Javascript">
+
+		function submitbutton(pressbutton) {
+			if (pressbutton == 'cancel' || pressbutton == 'config.list') {
+				submitform( pressbutton );
+				return;
+			}
+			var form = document.adminForm;
+			
+			// do field validation
+			
+				submitform(pressbutton);
+			
+		}
+
+		</script>
+          
+  <div class="adminform" align="left">
+       	<div style="margin-bottom:20px;">
+	        <table cellpadding="5" cellspacing="0" border="0" >
+    			<tr>
+                	<td align="left">Cost of a featured Land:</td>
+                    <td >
+                    	<input class="inputbox" type="text" name="cost_of_featured" size="20"  value="<?php echo $this->configs->cost_of_featured; ?>" />
+                    </td>
+                    <td colspan="2">
+                         
+					</td>
+      			</tr>
+                <tr>
+                	<td align="left">Cost of listing land on search top:</td>
+                    <td >
+                    	<input class="inputbox" type="text" name="cost_of_on_top" size="20"  value="<?php echo $this->configs->cost_of_on_top; ?>" />
+                    </td>
+                    <td colspan="2">
+                         
+					</td>
+      			</tr>
+                <tr>
+                	<td align="left">Cost of listing land in Newest lands:</td>
+                    <td >
+                    	<input class="inputbox" type="text" name="cost_of_newest" size="20"  value="<?php echo $this->configs->cost_of_newest; ?>" />
+                    </td>
+                    <td colspan="2">
+                         
+					</td>
+      			</tr>
+				<tr>
+                	<td align="left">Cost of listing land in Featured lands on homepage:</td>
+                    <td >
+                    	<input class="inputbox" type="text" name="cost_of_home_featured" size="20"  value="<?php echo $this->configs->cost_of_home_featured; ?>" />
+                    </td>
+                    <td colspan="2">
+                         
+					</td>
+      			</tr>
+                 <tr>
+                	<td valign="top" align="left"><?php echo JText::_('PUBLISHED'); ?>:</td>
+                    <td>
+                    <?php echo JHTML::_('select.booleanlist',  'published', 'class="inputbox"', $this->configs->published );?>
+                    </td>
+					<td colspan="2">
+                         
+					</td>
+                 </tr>
+                 
+            </table>
+		</div>
+		</div>
+
+
+
+
+</td>
+</tr>  
+</table>
+<input type="hidden" name="id" id="id" value="<?php echo $this->configs->id;?>">
+<input type="hidden" name="boxchecked" value="0" />
+<input type="hidden" name="task" value="config.save" />
+<input type="hidden" name="act" value="" />
+<input type="hidden" name="option" value="<?php echo JPM_COM_COMPONENT;?>" />
+</form>
+</div>

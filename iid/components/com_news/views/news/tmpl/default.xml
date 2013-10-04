@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="news Default Layout">
+		<message>
+			<![CDATA[NEWS DEFAULT LAYOUT DESCRIPTION]]>
+		</message>
+	</layout>
+	<state>
+		<name>news Default Layout</name>
+		<description>News DEFAULT LAYOUT DESCRIPTION</description>
+        <url>
+
+        </url>
+		<params>
+
+		</params>
+		<advanced>
+
+		</advanced>
+	</state>
+</metadata>

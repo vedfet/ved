@@ -1,0 +1,113 @@
+<?xml version="1.5" encoding="utf-8"?>
+<install type="component" version="1.5.0" method="upgrade">
+    <name>video</name>
+    <author>Vinod Dubey</author>
+    <creationDate>04/11/2010</creationDate>
+    <license>GNU/GPL</license>
+    <version>2.0</version>
+    <description>It creates a video manager component</description>
+
+    <!-- installation part -->
+    <install>
+        <queries>
+               <query>
+    		         DROP TABLE IF EXISTS `#__video_details` 
+		      </query>
+			  <query>
+			        CREATE TABLE IF NOT EXISTS `#__video_details` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `video_name` varchar(250) NOT NULL,
+  `image_name` varchar(250) NOT NULL,
+  `video_title` varchar(250) DEFAULT NULL,
+  `description` text,
+  `frontpage` tinyint(1) NOT NULL DEFAULT '0',
+  `published` tinyint(1) unsigned NOT NULL,
+  `checked_out` int(11) unsigned NOT NULL,
+  `checked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `ordering` int(11) NOT NULL,
+  `archive` int(2) DEFAULT '0',
+  `created` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+	         </query>
+			 
+			 <query>
+		  					DROP TABLE IF EXISTS `#__video_config`
+			</query>
+			<query>
+			 				CREATE TABLE IF NOT EXISTS `#__video_config` (
+  `id` int(3) DEFAULT '0',
+  `no_of_default_videos` smallint(4) NOT NULL,
+  `order_by` smallint(4) NOT NULL,
+  `from_email` varchar(100) NOT NULL,
+  `from_name` varchar(100) NOT NULL,
+  `email_needed` smallint(4) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+			</query>
+			<query>
+				INSERT INTO `#__video_config` (`id`, `no_of_default_videos`, `email_needed`,`from_name`,`from_email`) VALUES
+				(1,1,0,'','')
+			</query>
+        </queries>
+    </install>
+
+    <installfile>install.video.php</installfile>
+    <uninstallfile>uninstall.video.php</uninstallfile>
+
+    <!-- user part -->
+    <files folder="components/com_video">
+        <filename>controller.php</filename>
+        <filename>index.html</filename>
+        <filename>video.php</filename>
+        <folder>models</folder>
+        <folder>views</folder>
+		<folder>images</folder>
+		
+    </files>
+
+    <languages folder="language/en-GB">
+        <language tag="en-GB">en-GB.com_video.ini</language>
+    </languages>
+
+    <!-- administration part -->
+    <administration>
+
+    <menu task="default" img="js/ThemeOffice/component.png">Web Video</menu>
+    <submenu>
+        <menu link="option=com_video">Video Manager</menu>
+    </submenu>
+
+    <files>
+        <filename>video.xml</filename>
+    </files>
+    <files folder="administrator/components/com_video">
+        <filename>config.xml</filename>
+        <filename>controller.php</filename>
+        <filename>index.html</filename>
+        <filename>install.video.php</filename>
+        <filename>video.php</filename>
+		<filename>video.defines.php</filename>
+        <filename>uninstall.video.php</filename>
+        <folder>helpers</folder>
+        <folder>models</folder>
+        <folder>tables</folder>
+        <folder>views</folder>
+		<folder>controllers</folder>
+		<folder>jscalendar</folder>
+		<folder>assets</folder>
+		<folder>images</folder>
+  </files>
+
+    <languages folder="administrator/language/en-GB">
+        <language tag="en-GB">en-GB.com_video.menu.ini</language>
+        <language tag="en-GB">en-GB.com_video.ini</language>
+    </languages>
+
+    </administration>
+
+    <params>
+
+    </params>
+
+</install>

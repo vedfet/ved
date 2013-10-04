@@ -1,0 +1,259 @@
+<?php
+/**
+ * Joomla! 1.5 component survey
+ *
+ * @version $Id: survey.php 2010-06-03 01:08:55 svn $
+ * @author Vinod Dubey
+ * @package Joomla
+ * @subpackage survey
+ * @license GNU/GPL
+ *
+ * It creates component for survey
+ *
+ */
+
+defined( '_JEXEC' ) or die( 'Restricted access' );
+
+jimport('joomla.application.component.controller');
+
+
+JLoader::import("property_config",JPATH_COMPONENT."/tables/");
+
+class AdminConfigController extends JController {
+	var $component = null;
+	var $configTable = null;
+	var $configClassname = null;
+	
+	/**
+	 * Controler for the Control Panel
+	 * @param array		configuration
+	 */
+	function __construct($config = array())
+	{
+		parent::__construct($config);
+		$this->registerTask( 'list',  'edit' );
+		$this->registerDefaultTask("edit");
+
+		$this->component = 	JPM_COM_COMPONENT;
+		$this->configTable = "#__property_config";
+		$this->configClassname = "TableProperty_config";
+		
+	}
+
+	/**
+	 * Category Management code
+	 *
+	 * Author: Geraint Edwards
+	 */
+	/**
+	 * Manage config - show lists
+	 *
+	 */
+	function overview( )
+	{
+		global $mainframe;
+		// TODO fix this when database is updated
+		$db	=& JFactory::getDBO();
+		$user =& JFactory::getUser();
+
+		if (strtolower($user->usertype)!="super administrator" && strtolower($user->usertype)!="administrator"){
+			$this->setRedirect( "index.php?option=$this->component&task=cpanel.cpanel", "Not Authorised - must be admin" );
+			return;
+		}
+
+		$limit		= intval( $mainframe->getUserStateFromRequest( "cat_listlimit", 'limit', 10 ));
+		$limitstart = intval( $mainframe->getUserStateFromRequest( "cat_{$this->component}limitstart", 'limitstart', 0 ));
+
+				// get the total number of records
+		$query = "SELECT count(*) FROM $this->configTable"
+		. "\n WHERE 1 "	;
+		$db->setQuery( $query);
+		$total = $db->loadResult();
+		echo $db->getErrorMsg();
+		if( $limit > $total ) {
+			$limitstart = 0;
+		}
+
+		$db	=& JFactory::getDBO();
+
+		$sql = "SELECT c.* FROM $this->configTable as c"
+		. "\n WHERE 1 "
+		. "\n ORDER BY ordering ";
+		if ($limit>0){
+			$sql .= "\n LIMIT $limitstart, $limit";
+		}
+
+		$db->setQuery($sql);
+		$rows = $db->loadObjectList();
+		
+		jimport('joomla.html.pagination');
+		$pageNav = new JPagination( $total, $limitstart, $limit  );
+
+		// get the view
+		$this->view = & $this->getView("config","html");
+
+		// Set the layout
+		$this->view->setLayout('overview');
+		$this->view->assign('title'   , JText::_("Land Configs"));
+		$this->view->assign('configs',$rows);
+		$this->view->assign('pageNav',$pageNav);
+
+		$this->view->display();
+
+	}
+
+	/**
+	 * Category Editing code
+	 *
+	 * Author: Geraint Edwards
+	 * 
+	 */
+	function edit(){
+		$cid = JRequest::getVar(	'cid',	array(0) );
+		JArrayHelper::toInteger($cid);
+
+		// TODO fix this when database is updated
+		$section_name = "com_property";
+
+		$user =& JFactory::getUser();
+
+		if (strtolower($user->usertype)!="super administrator" && strtolower($user->usertype)!="administrator"){
+			$this->setRedirect( "index.php?option=".JP_COM_COMPONENT."&task=config.list", "Not Authorised - must be super admin" );
+			return;
+		}
+
+		$db	=& JFactory::getDBO();
+
+		if (count($cid)<=0){
+			$this->setRedirect( "index.php?option=".JP_COM_COMPONENT."&task=config.list", "Invalid Category Selection" );
+			return;
+		}
+		else {
+			$cid=$cid[0];
+		}
+		$cid=1;
+		$configs = new $this->configClassname($db);
+		$configs->load($cid);
+
+		// get property for parent info
+		
+				
+		// authorised user to select admin
+		$params = JComponentHelper::getParams("com_property");
+		
+		
+		// get the view
+		$this->view = & $this->getView("config","html");
+
+		// Set the layout
+		$this->view->setLayout('edit');
+		$this->view->assign('title'   , JText::_("Configurations"));
+		$this->view->assign('configs',$configs);
+			
+		$this->view->display();
+	}
+
+	/**
+	 * Category Saving code
+	 *
+	 * Author: Geraint Edwards
+	 * 
+	 */
+	function save(){
+		$db	=& JFactory::getDBO();
+		$user =& JFactory::getUser();
+
+		$cid = JRequest::getVar('cid',	array(0) );
+		JArrayHelper::toInteger($cid);
+
+		if (strtolower($user->usertype)!="super administrator" && strtolower($user->usertype)!="administrator"){
+			$this->setRedirect( "index.php?option=$this->component&task=cpanel.cpanel", "Not Authorised - must be admin" );
+			return;
+		}
+        $post = JRequest::get('post');
+		$model = $this->getModel('config');
+		if($model->save($post)) 
+		{
+			$msg = JText::_('Configuration Saved'); 
+			$this->setRedirect("index.php?option=".JPM_COM_COMPONENT."&task=config.edit",$msg);
+		} 
+	    else
+		{
+		  	$msg = JText::_('Configuration Not Saved'); 
+			$this->setRedirect("index.php?option=".JPM_COM_COMPONENT."&task=config.edit",$msg);
+		}
+	
+	}
+
+	/**
+	 * Category Ordering code
+	 *
+	 * Author: Geraint Edwards
+	 * Copyright: 2007 Geraint Edwards
+	 * 
+	 */
+	function saveorder(){
+
+		$user =& JFactory::getUser();
+		if (strtolower($user->usertype)!="super administrator" && strtolower($user->usertype)!="administrator"){
+			$this->setRedirect( "index.php?option=$this->component&task=cpanel.cpanel", "Not Authorised - must be admin" );
+			return;
+		}
+		$post = JRequest::get('post');
+		$model = $this->getModel('config');
+		if ($model->saveorder()) 
+		{
+			$msg = JText::_( 'NEW ORDERING SAVED' );
+		}
+		$this->setRedirect("index.php?option=".JPM_COM_COMPONENT."&task=config.edit",$msg);
+	}
+
+	/**
+	 * Category Deletion code
+	 *
+	 * Author: Geraint Edwards
+	 * 
+	 */	
+	function delete(){
+	$post = JRequest::get('post');
+		$model = $this->getModel('config');
+		if($model->delete($post)) 
+		{
+			$msg = JText::_('Successfully Deleted'); 
+			$this->setRedirect("index.php?option=".JPM_COM_COMPONENT."&task=config.edit",$msg);
+		} 
+	    else
+		{
+		  	$msg = JText::_('Not able to Delete'); 
+			$this->setRedirect("index.php?option=".JPM_COM_COMPONENT."&task=config.edit",$msg);
+		}
+	}
+
+    function orderup()
+	{
+		$model = $this->getModel('config');
+		$model->move(-1);
+		$this->setRedirect("index.php?option=".JPM_COM_COMPONENT."&task=config.edit");
+	}
+	
+	function orderdown()
+	{
+		$model = $this->getModel('config');
+		$model->move(1);
+		$this->setRedirect("index.php?option=".JPM_COM_COMPONENT."&task=config.edit");
+	}
+	
+	function publish(){
+		$model = $this->getModel('config');
+		$model->publish(1); 
+		$this->setRedirect("index.php?option=".JPM_COM_COMPONENT."&task=config.edit");
+
+			}
+
+	function unpublish(){
+	    $model = $this->getModel('config');
+		$model->publish(0); 
+		$this->setRedirect("index.php?option=".JPM_COM_COMPONENT."&task=config.edit");
+			}
+
+}

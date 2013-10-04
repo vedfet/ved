@@ -1,0 +1,23 @@
+<?xml version="1.5" encoding="utf-8"?>
+<install type="module" version="1.5.0">
+	<name>Homegallery</name>
+	<author>Gajendra</author>
+	<creationDate>August 2010</creationDate>
+	<copyright></copyright>
+	<license></license>
+	<authorEmail></authorEmail>
+	<authorUrl></authorUrl>
+	<version>1.5.0</version>
+	<description>This module shows a homegallery.</description>
+	<files>
+		<filename module="mod_iid_homegalleryrotate">mod_iid_homegalleryrotate.php</filename>
+		<filename>tmpl/default.php</filename>
+		<filename>tmpl/index.html</filename>
+		<filename>index.html</filename>
+	</files>
+	<params>
+		 <param name="image_path" type="text" default="0" label="image_path" description="Select image from the path" />
+		<param name="moduleclass_sfx" type="text" default="" label="Module Class Suffix" description="A suffix to be applied to the css class of the module (table.moduletable), this allows individual module styling" />
+	</params>
+	
+</install>

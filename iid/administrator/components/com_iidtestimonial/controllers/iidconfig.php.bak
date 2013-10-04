@@ -1,0 +1,136 @@
+<?php
+/**
+ * Joomla! 1.5 component monappointment
+ *
+ * @version $Id: monappointment.php 2010-06-03 01:08:55 svn $
+ * @author Vinod Dubey
+ * @package Joomla
+ * @subpackage monappointment
+ * @license GNU/GPL
+ *
+ * It creates component for monappointment
+ *
+ */
+
+defined( '_JEXEC' ) or die( 'Restricted access' );
+
+jimport('joomla.application.component.controller');
+
+
+JLoader::import("monappointmentconfig",IID_ADMINPATH."/tables/");
+
+class AdminIidconfigController extends JController {
+	var $component = null;
+	var $iidconfigTable = null;
+	var $iidconfigClassname = null;
+
+	function __construct($config = array())
+	{
+		parent::__construct($config);
+		$this->registerTask( 'edit', 'edit' );
+		$this->registerDefaultTask("edit");
+		$this->component = 	IID_COM_COMPONENT;
+		$this->iidTable = "#__iidtestimonial_config";
+		$this->iidClassname = "TableIidConfig";
+		
+	}
+
+	function edit()
+			{
+						$id = JRequest::getVar('id',1);
+						// TODO fix this when database is updated
+						$db =& JFactory::getDBO();		
+						$lists=array();			
+						$iidconfiglist = new $this->iidClassname($db);
+						$iidconfiglist->load($id);
+						
+						
+						$no_of_default_iids = $this->getno_of_default_iids();
+						$lists['no_of_default_iids'] = JHTML::_('select.genericlist',  $no_of_default_iids, 'no_of_default_iids', 'size ="1"' , 'value', 'text',$iidconfiglist->no_of_default_iids);	
+						$order_by = $this->getorder_by();
+						$lists1['order_by'] = JHTML::_('select.genericlist',  $order_by, 'order_by', 'size ="1"' , 'value', 'text',$iidconfiglist->order_by);		
+						// get news for parent info
+						// authorised user to select admin
+						$params = JComponentHelper::getParams("com_iid");
+						$this->view = & $this->getView("iidconfig","html");
+						
+						// Set the layout
+						$this->view->setLayout('edit');
+						$this->view->assign('title', JText::_("Iid Configuration Details"));
+						$this->view->assign('iidconfiglist', $iidconfiglist);
+						$this->view->assign('lists',$lists);
+						$this->view->assign('lists1',$lists1);
+						$this->view->assign('conf',$conf);		
+						$this->view->display();
+			}
+	function getno_of_default_iids()
+	   {
+		$no_of_default_iids = array();
+		$no_of_default_iids[] = JHTML::_('select.option', '', JText::_('Select'));
+		$no_of_default_iids[] = JHTML::_('select.option', '1', JText::_('1'));
+		$no_of_default_iids[] = JHTML::_('select.option', '2', JText::_('2'));
+		$no_of_default_iids[] = JHTML::_('select.option', '3', JText::_('3'));
+		return $no_of_default_iids;
+		}	
+	function getorder_by()
+	   {
+		$order_by = array();
+		$order_by[] = JHTML::_('select.option', '', JText::_('Select'));
+		$order_by[] = JHTML::_('select.option', '1', JText::_('By First Name'));
+		$order_by[] = JHTML::_('select.option', '2', JText::_('By Order'));
+		$order_by[] = JHTML::_('select.option', '3', JText::_('By Date'));
+		return $order_by;
+		}	
+	function save(){
+		
+		$user =& JFactory::getUser();
+        $cid = JRequest::getVar('id',	0 );
+		$id=$_GET['id'];
+		$db	=& JFactory::getDBO();
+		if (strtolower($user->usertype)!="super administrator" && strtolower($user->usertype)!="administrator"){
+			$this->setRedirect( "index.php?option=$this->component&task=cpanel.cpanel", "Not Authorised - must be admin" );
+			return;
+		}
+        
+		$post = JRequest::get('post');
+		 
+		
+		 $post['header_text'] =JRequest::getVar( 'header_text', '', 'post', 'string', JREQUEST_ALLOWHTML );
+		 $post['footer_text'] =JRequest::getVar( 'footer_text', '', 'post', 'string', JREQUEST_ALLOWHTML );
+
+		
+		
+		$model = $this->getModel('iidconfig');
+		if($model->save($post)) 
+		{
+			$msg = JText::_('Record Successfully Saved');
+			$this->setRedirect("index.php?option=".IID_COM_COMPONENT."&task=iid.list",$msg);
+		}
+	    else
+		{
+		  	$msg = JText::_('Not able to Saved'); 
+			$this->setRedirect("index.php?option=".IID_COM_COMPONENT."&task=iidconfig.edit",$msg);
+			
+		}
+	
+	}
+
+
+	function delete(){
+	    $post = JRequest::get('post');
+		$model = $this->getModel('iidconfig');
+		if($model->delete($post)) 
+		{
+			$msg = JText::_('Record Successfully Deleted');
+			$this->setRedirect("index.php?option=".IID_COM_COMPONENT."&task=iid.list",$msg);
+		}
+	    else
+		{
+		  	$msg = JText::_('Not able to Delete'); 
+			$this->setRedirect("index.php?option=".IID_COM_COMPONENT."&task=iidconfig.edit",$msg);
+			
+		}
+	}
+	
+
+}

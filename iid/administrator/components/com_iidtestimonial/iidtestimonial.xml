@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install type="component" version="1.5.0" method="upgrade">
+    <name>iidtestimonial</name>
+    <author>Gajendra Kumar Jain</author>
+    <creationDate>28/11/2010</creationDate>
+    <license>GNU/GPL</license>
+    <version>1.0</version>
+    <description>This component is used for iidtestimonial given by someone.</description>
+
+    <!-- installation part -->
+    <install>
+        <queries>
+           	<query>
+    		   DROP TABLE IF EXISTS `#__iidtestimonial`;
+			</query>
+	  		<query>			
+				 CREATE TABLE `#__iidtestimonial` (
+  `id` int(11) NOT NULL auto_increment,
+  `firstname` varchar(20) NOT NULL,
+  `lastname` varchar(200) NOT NULL,
+  `email` varchar(200) NOT NULL,
+  `phone` varchar(200) NOT NULL,
+  `city` varchar(1000) NOT NULL,
+  `testimonial_story` text NOT NULL,
+  `videourl` varchar(255) NOT NULL,
+  `archive` tinyint(1) NOT NULL default '1',
+  `front_page_publish` tinyint(1) NOT NULL default '1',
+  `published` tinyint(1) NOT NULL default '1',
+  `created` datetime NOT NULL,
+  `created_by` smallint(4) NOT NULL,
+  `checked_out` smallint(4) NOT NULL,
+  `checked_out_time` datetime NOT NULL,
+  `ordering` int(11) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+	 		</query>	
+        <query>
+    		   DROP TABLE IF EXISTS `#__iidtestimonial_config`;
+			</query>
+	  		<query>			
+				 CREATE TABLE `#__iidtestimonial_config` (
+							  `id` int(3) default '0',
+							  `from_email` varchar(100) NOT NULL,
+							  `from_name` varchar(100) NOT NULL,
+							  `header_text` text NOT NULL,
+							  `footer_text` text NOT NULL
+							) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+	 		</query>	
+			<query>
+			
+			INSERT INTO `jos_iidtestimonial_config` (`id`, `from_email`, `from_name`, `header_text`, `footer_text`) VALUES 
+			(1, 'ashish@yahoo.com', 'ashish', 'HEADER_TEXT', 'FOOTER_TEXT');
+		
+		</query>
+
+		 <query>
+						DROP TABLE IF EXISTS `#__captcha` 
+			   </query>
+			    <query>
+							CREATE TABLE `#__captcha` (
+  `id` int(11) NOT NULL auto_increment,
+  `captcha_value` varchar(255) NOT NULL,
+  `captcha_hash` varchar(255) NOT NULL,
+  `created` datetime NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+			   </query>
+		
+		</queries>
+    </install>
+
+    <installfile>install.iidtestimonial.php</installfile>
+    <uninstallfile>uninstall.iidtestimonial.php</uninstallfile>
+
+    <!-- user part -->
+    <files folder="components/com_iidtestimonial">
+        <filename>controller.php</filename>
+        <filename>index.html</filename>
+        <filename>router.php</filename>
+        <filename>iidtestimonial.php</filename>
+        <folder>models</folder>
+        <folder>views</folder>
+    </files>
+
+    <languages folder="language/en-GB">
+        <language tag="en-GB">en-GB.com_iidtestimonial.ini</language>
+    </languages>
+
+    <!-- administration part -->
+    <administration>
+
+    <menu task="default" img="js/ThemeOffice/component.png">iidtestimonial</menu>
+    <submenu>
+        <menu link="option=com_iidtestimonial">iidtestimonial</menu>
+    </submenu>
+
+    <files>
+        <filename>iidtestimonial.xml</filename>
+    </files>
+	 <files>
+        <filename>captcha_images.php</filename>
+    </files>
+	 <files>
+        <filename>MONOFONT.TTF</filename>
+    </files>
+
+
+    <files folder="administrator/components/com_iidtestimonial">
+        <filename>config.xml</filename>
+        <filename>controller.php</filename>
+        <filename>index.html</filename>
+        <filename>install.iidtestimonial.php</filename>
+        <filename>iidtestimonial.php</filename>
+        <filename>uninstall.iidtestimonial.php</filename>
+		<filename>iidtestimonial.xml</filename>
+        <filename>iidtestimonial.defines.php</filename>
+        <folder>helpers</folder>
+        <folder>models</folder>
+        <folder>tables</folder>
+        <folder>views</folder>
+		<folder>controllers</folder>
+		<folder>assets</folder>
+    </files>
+
+    <languages folder="administrator/language/en-GB">
+        <language tag="en-GB">en-GB.com_iidtestimonial.menu.ini</language>
+        <language tag="en-GB">en-GB.com_iidtestimonial.ini</language>
+    </languages>
+
+    </administration>
+
+    <params>
+
+    </params>
+
+</install>

@@ -1,0 +1,113 @@
+<?php
+/**
+ * Joomla! 1.5 component Survey
+ *
+ * @version $Id: controller.php 2010-03-14 01:52:14 svn $
+ * @author Vinod Dubey
+ * @package Joomla
+ * @subpackage Survey
+ * @license GNU/GPL
+ *
+ * Display and manage Survey and related items 
+ *
+ * This component file was created using the Joomla Component Creator by Not Web Design
+ * http://www.notwebdesign.com/joomla_component_creator/
+ *
+ */
+
+// no direct access
+
+// Check to ensure this file is included in Joomla!
+defined('_JEXEC') or die();
+
+jimport( 'joomla.application.component.model' );
+
+class SurveyModelSurvey extends JModel {
+
+	function save($data)
+	{
+	
+		
+
+		$query="Insert Into #__survey_answer (id,survey_id, name, email, ipaddress,browser,created) Values ('',".$data['survey_id'].",'".$data['name']."','".$data['email']."','".$data['ipaddress']."','".$data['browser']."','".$data['created']."')";
+
+		
+		$db =& JFactory::getDBO();
+		$db->setQuery( $query );
+		$db->query();
+		
+		$id = $db->insertid();
+		
+		 $count=count($data);
+		 $values = $data;		
+		
+		while (list($key, $value) = each($values)) 
+			{
+				if(stristr($key, 'answer') == true)
+				{
+					if(is_array($data[$key]))
+					{
+						$answer=str_replace("answer", "", $key);
+						$answers = explode("_", $answer);
+						$countvalue=count($data[$key]);
+						$answervalue="";
+						for($k=0;$k<$countvalue;$k++)
+						{
+							$answervalue=$answervalue.$data[$key][$k];
+							if($k!=$countvalue-1)
+							{
+								$answervalue=$answervalue.",";
+							}
+						}
+						
+						$query="Insert Into #__survey_answer_details (id,survey_id, survey_answer_id, survey_question_id, answer) Values ('',".$data['survey_id'].",".$id.",".$answers[0].",'".$answervalue."')";
+						
+						$db =& JFactory::getDBO();
+						$db->setQuery( $query );
+						$db->query();
+						
+					}
+					else
+					{
+						$answer=str_replace("answer", "", $key);
+						$query="Insert Into #__survey_answer_details (survey_id, survey_answer_id, survey_question_id, answer) Values (".$_REQUEST['id'].",".$id.",".$answer.",'".$data[$key]."')";
+						$db =& JFactory::getDBO();
+						$db->setQuery( $query );
+						$db->query();
+					}
+				}
+			} 
+
+			global $sitename,$live_site,$mailfrom;
+			
+			$subject="Survey";
+			$body = "Hello \n\n\n\n A new survey has been taken by ".$data['name']." on the ".$sitename." website. For more specific details, log on to ".$live_site."/administator.";
+			$query1 = "SELECT email FROM #__survey_configuration";
+			$db =& JFactory::getDBO();
+			$db->setQuery($query1);
+			$email_id=$db->loadResult();
+			
+			
+			if(count($email_id)>0)
+			{ 
+				$email_id= explode(",", $email_id);
+          		foreach($email_id as $to)
+				{
+           			echo $to;exit;
+					JUtility::sendMail( $data['email'], $data['name'], $to, $subject, $body, $mode=0, $cc=NULL, $bcc=NULL, $attachment=NULL, $replyto=NULL, $replytoname=NULL);
+	 			}
+				$body="Thank you for summitting this survey";
+				JUtility::sendMail( $mailfrom, $data['name'], $data['email'], $subject, $body, $mode=0, $cc=NULL, $bcc=NULL, $attachment=NULL, $replyto=NULL, $replytoname=NULL);
+	 		} 						
+			else
+			{
+				$to=$mailfrom;
+				JUtility::sendMail( $data['email'], $data['name'], $to, $subject, $body, $mode=0, $cc=NULL, $bcc=NULL, $attachment=NULL, $replyto=NULL, $replytoname=NULL);
+				JUtility::sendMail( $to, $data['name'], $data['email'], $subject, $body, $mode=0, $cc=NULL, $bcc=NULL, $attachment=NULL, $replyto=NULL, $replytoname=NULL);
+			}
+
+		return true;
+	}
+
+}
+?>

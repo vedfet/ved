@@ -1,0 +1,50 @@
+<?php
+/**
+ * Joomla! 1.5 component monappointment
+ *
+ * @version $Id: monappointment.php 2010-06-03 01:08:55 svn $
+ * @author Vinod Dubey
+ * @package Joomla
+ * @subpackage monappointment
+ * @license GNU/GPL
+ *
+ * It creates component for monappointment
+ *
+
+ */
+
+// Check to ensure this file is included in Joomla!
+defined('_JEXEC') or die();
+
+/* 
+ *
+ * HTML View class for the component
+ *
+ * @static
+ */
+ class AdminMonappointmentConfigViewmonappointmentConfig extends MonappointmentAbstractView 
+{
+	function edit($tpl = null)
+	{
+	        JHTML::stylesheet( 'monappointmentadmin.css', 'administrator/components/'.MONAPPOINTMENT_COM_COMPONENT.'/assets/css/' );
+		    global $mainframe, $option;
+            $db		=& JFactory::getDBO();
+		    $uri	=& JFactory::getURI();
+		    JHTML::stylesheet( 'monappointmentadmin.css', 'administrator/components/'.MONAPPOINTMENT_COM_COMPONENT.'/assets/css/' );
+			$document =& JFactory::getDocument();
+			$document->setTitle(JText::_('MONAPPOINTMENT'));
+			JToolBarHelper::title( JText::_('MONAPPOINTMENT_CONFIGURATION'), 'monappointment' );
+			JToolBarHelper::save('monappointmentconfig.save');
+			JToolBarHelper::cancel('monappointment.list');
+			JSubMenuHelper::addEntry(JText::_('Control Panel'), 'index.php?option='.MONAPPOINTMENT_COM_COMPONENT, true);
+			JSubMenuHelper::addEntry(JText::_('Manage Monappointment '), 'index.php?option='.MONAPPOINTMENT_COM_COMPONENT.'&task=monappointment.list', true);
+		    JSubMenuHelper::addEntry(JText::_('Manage Archive '), 'index.php?option='.MONAPPOINTMENT_COM_COMPONENT.'&task=monappointment.list&archive=-1', true);
+		    JSubMenuHelper::addEntry(JText::_('Manage Monappointment Configuration'), 'index.php?option='.MONAPPOINTMENT_COM_COMPONENT.'&task=monappointmentconfig.edit', true);
+			$params = JComponentHelper::getParams(MONAPPOINTMENT_COM_COMPONENT);
+		    JHTML::_('behavior.tooltip');
+	   }
+	  
+}
+
+
+	

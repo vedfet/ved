@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install type="module" version="1.5.0">
+	<name>Mon Youtube Video Module</name>
+	<author>Diwakar Kumar Singh</author>
+	<creationDate>December 2010</creationDate>
+	<copyright></copyright>
+	<license></license>
+	<authorEmail>diwakar.singh@comnez.com</authorEmail>
+	<authorUrl></authorUrl>
+	<version>1.5.0</version>
+	<description>This module shows a Video image.</description>
+	<files>
+		<filename module="mod_youtube_video">mod_youtube_video.php</filename>
+		<filename module="mod_youtube_video">helper.php</filename>
+		<filename>tmpl/default.php</filename>
+		<filename>tmpl/index.html</filename>
+		<filename>index.html</filename>
+	</files>
+	<params>
+		<param name="background_image" type="text" default="images/mon_images/video/images/watch_video_bg.png" label="Background Image Path" description="Background Image path" size="70"  />
+	        <param name="classsufix" type="text" default="" label="Class Sufix" description="Class Sufix" size="70" />
+<param name="video_type" type="list" default="youtubevideo" label="Select Type of Video You want to Play" description="If you select Youtube Video or Media Manager Video then enter whole path of video.If you select Component Video then enter Video ID bellow">
+			<option value="componentvideo">Component Video</option>
+			<option value="youtubevideo">Youtube Video</option>
+			<option value="mediavideo">Media Manager Video</option>
+			</param>
+	        <param name="id" type="text" default="" label="video Path or ID" description="For Youtube Video or Media Manager Video please enter Video Path e.g. http://www.youtube.com/watch?v=6WNt2GD5ufs and for Component Video Please enter Video ID" size="40" />
+			<param name="height" type="text" default="" label="Image height" description="Image height" size="40" />
+			<param name="width" type="text" default="" label="Image width" description="Image width" size="40" />
+            <param name="module_text" type="radio" default="" label="Module Type" description="Select to show which type of module you want to show">
+				<option value="1">Text</option>
+				<option value="2">Image</option>
+			</param>		
+	</params>
+	
+</install>

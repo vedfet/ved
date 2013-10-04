@@ -1,0 +1,232 @@
+/*
+ * Ext Core Library Examples 3.0
+ * http://extjs.com/
+ * Copyright(c) 2006-2009, Ext JS, LLC.
+ * 
+ * The MIT License
+ * 
+ */
+
+.ux-menu-init-hidden {
+visibility:hidden;
+position:absolute;
+}
+
+.ux-menu-container {
+position:relative;
+}
+
+.ux-menu,.ux-menu ul {
+list-style-image:none;
+list-style-position:outside;
+list-style-type:none;
+line-height:1;
+margin:0;
+padding:0;
+}
+
+
+
+.ux-menu ul {
+background-image:url(images/menu_bottom.gif);
+
+position:absolute;
+top:0;
+left:0;
+margin:0px;
+padding:0px;
+background-position:bottom;
+width:166px;
+height:auto;
+padding-bottom:13px;
+background-repeat:no-repeat;
+float:left;
+}
+.ux-menu ul li a
+{
+background-image:url(images/li-bg.png);
+width:146px;
+background-repeat:repeat-y;
+float:left;
+margin-left:0px;
+_margin-left:1px;
+padding:10px;;
+}
+.ux-menu ul li .ux-menu-link-first
+{
+	background-image:url(images/top-li-bg.png);
+	background-repeat:no-repeat;
+width:146px;
+height:10px;
+float:left;
+margin-left:0px;
+_margin-left:1px;
+padding:10px;;
+padding-top:20px;
+padding-bottom:8px;
+}
+.ux-menu-sub .ux-menu-link-first:hover{
+background:none;
+background-image:url(images/li-bg-hover.png);
+background-repeat:repeat-y;
+outline:0;
+color:#006699;
+}
+.ext-border-box .ux-menu-ie-iframe,.ext-ie7 .ux-menu-ie-iframe {
+position:absolute;
+top:0;
+left:0;
+display:none;
+z-index:-1;
+margin:0;
+padding:0;
+}
+
+.ux-menu-vertical .ux-menu-item-main {
+clear:left;
+}
+.ux-menu li {
+position:relative;
+float:left;
+/*padding-top:18px;*/
+padding-bottom:8px;
+_padding-bottom:8px;
+_padding-right:7px;
+padding-right:0px;
+
+
+}
+.ux-menu .ux-menu-sub li {
+padding:0px;
+}
+.ux-menu-link-first
+{
+	border-left:0px solid #007349 !important;
+}
+.ux-menu a {
+display:block;
+position:relative;
+text-decoration:none;
+color:#00749a;
+float:left;
+font-family:Arial Narrow;
+font-size:21px ;
+padding-left:10px;
+padding-right:5px;
+_padding-left:7px;
+
+}
+
+
+.ux-menu-sub a
+{
+	border:0;
+	border-right:0px solid #b8b8b8;
+	color:#006699;
+font-family:Arial;
+font-size:12px;
+}
+.ux-menu ul a {
+width:100%;
+}
+
+.ux-menu li:hover {
+background-color:#91c4e1;
+}
+
+
+
+.ux-menu a:focus,.ux-menu a:hover,.ux-menu a.ux-menu-link-hover {
+outline:0;
+color:#00749a;
+}
+.ux-menu-sub a:hover{
+background-image:url(images/li-bg-hover.png);
+background-repeat:repeat-y;
+outline:0;
+color:#f4b23b;
+}
+.ux-menu a.ux-menu-link-hover .ux-menu-arrow {
+display:block;
+width:8px;
+height:6px;
+right:10px;
+margin-top:-7px;
+_margin-top:5px;
+position:absolute;
+font-size:0;
+}
+.ux-menu-clearfix:after {
+content:".";
+display:block;
+height:0;
+clear:both;
+visibility:hidden;
+}
+
+.ux-menu a.ux-menu-link-parent {
+min-width:1px;
+}
+
+.ux-menu.ux-menu-vertical a {
+border-bottom:0;
+border-right:1px solid #e3dad1;
+}
+
+.ux-menu ul a.ux-menu-link-last,.ux-menu.ux-menu-vertical a.ux-menu-link-last {
+
+font-family:Arial narrow;
+font-size:14px;
+color:#006699;
+
+}
+
+.ux-menu-arrow {
+display:block;
+width:8px;
+height:6px;
+right:10px;
+position:absolute;
+font-size:0;
+}
+
+.current .ux-menu-arrow {
+display:block;
+width:8px;
+height:6px;
+right:10px;
+position:absolute;
+font-size:0;
+}
+
+.ux-menu.ux-menu-vertical .ux-menu-arrow,.ux-menu ul .ux-menu-arrow {
+width:6px;
+height:8px;
+top:13px;
+}
+
+.ext-border-box .ux-menu-arrow {
+top:17px;
+}
+
+.ext-border-box .ux-menu.ux-menu-vertical .ux-menu-arrow,.ext-border-box .ux-menu ul .ux-menu-arrow {
+top:16px;
+}
+
+.ux-menu ul.ux-menu-hidden {
+display:none;
+}
+
+.ux-menu a.current {
+
+color:#007399;
+}
+/* add new*/
+.ux-menu-sub
+{
+top:32px !important;
+}
+.ux-menu-sub a
+{
+	border-top:1px solid #006699;
+}

@@ -1,0 +1,128 @@
+/**
+* @version $Id: login.css 10387 2008-06-03 10:59:16Z pasamio $
+* @copyright Copyright (C) 2005 - 2008 Open Source Matters. All rights reserved.
+* @license GNU/GPL, see LICENSE.php
+* Joomla! is free software. This version may have been modified pursuant
+* to the GNU General Public License, and as distributed it includes or
+* is derivative of works licensed under the GNU General Public License or
+* other free or open source software licenses.
+* See COPYRIGHT.php for copyright notices and details.
+*/
+
+/**
+ * Joomla! 1.5 Admin template main css file
+ *
+ * @author		Andy Miller <andy.miller@joomla.org>
+ * @package		Joomla
+ * @since		1.5
+ * @version    1.0
+ */
+
+/* -- Imported styles ----------------------------- */
+
+@import url("general.css");
+
+/* -- Specific styles ----------------------------- */
+
+form  			{ margin: 0px; padding: 0px; }
+form .inputbox  { width: 118px; margin-left: 0px; }
+form br 	    { display: none; }
+.login          { margin: 0 auto; width: 200px;  }
+
+h1 {
+  margin: 15px 0;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+  margin-bottom: 10px;
+  text-align:left;
+}
+
+#lock  {
+	background: url(../images/j_login_lock.jpg) 50% 0 no-repeat;
+	width: 150px;
+	height: 137px;
+}
+
+#content-box .m {
+  padding: 10px;
+}
+
+#content-box .padding {
+  padding: 30px 0;
+}
+
+#section-box  { float: right; width: 220px; margin-left: 10px;}
+
+#section-box .m {
+  padding: 5px;
+}
+#section-box .padding {
+	background: none; padding: 0;
+}
+
+.button { text-align: right; }
+
+.login-form    { text-align: left; width: 60%; }
+.login-form h1 { display: none; }
+.login-form p  { padding: 0 1em 0 1em; }
+
+.login-text { text-align: left; width: 40%; float: left; }
+
+#form-login label {
+	display: block;
+	float: left;
+	width: 120px;
+	text-align: left;
+	padding: 4px;
+	color: #fff;
+	font-weight: bold;
+}
+
+#form-login .button_holder {
+text-align:center;
+}
+
+#form-login div.button1{
+ 	BACKGROUND: url(../images/plugin.gif) no-repeat;
+	height:26px;
+	width:61px;
+}
+
+#form-login div.button1 div.next {
+
+}
+BODY {
+	FONT-SIZE: 12px; BACKGROUND: #ffffff; OVERFLOW: auto; FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+#mwg2_login {
+	MARGIN: 0px auto; WIDTH: 300px; POSITION: relative; TOP: 50px; TEXT-ALIGN: left
+}
+#mwg2_login FORM {
+	PADDING-RIGHT: 30px; PADDING-LEFT: 30px; BACKGROUND: url(../images/loginbg.gif) no-repeat; PADDING-BOTTOM: 0px; WIDTH: 140px; PADDING-TOP: 9px; HEIGHT: 190px
+}
+#mwg2_login IMG {
+	MARGIN-TOP: 5px
+}
+#mwg2_login INPUT {
+	BORDER-RIGHT: #999999 1px solid; BORDER-TOP: #999999 1px solid; BORDER-LEFT: #999999 1px solid; WIDTH: 118px; TEXT-INDENT: 2px; BORDER-BOTTOM: #999999 1px solid
+}
+#mwg2_login INPUT.plugin {
+	LEFT: 79px; CURSOR: pointer; POSITION: relative; TOP: 27px;
+	width:61px;
+	BORDER-TOP-WIDTH: 0px; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px; POSITION: relative; TOP: 27px; BACKGROUND-COLOR: transparent; BORDER-RIGHT-WIDTH: 0px
+}
+#mwg2_login IMG.plugin {
+	
+}
+#mwg2_login IMG.notice {
+	LEFT: 10px; POSITION: relative; TOP: 100px
+}
+#mwg2_login IMG.shadow {
+	LEFT: -60px; POSITION: relative; TOP: 25px
+}
+#login-error-message {
+	FONT-WEIGHT: bold; FONT-SIZE: 11px;  COLOR: #ff0000; LINE-HEIGHT: 14px;  HEIGHT: 15px; TEXT-ALIGN: center;
+}

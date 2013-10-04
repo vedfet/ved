@@ -1,0 +1,34 @@
+<?xml version="1.5" encoding="utf-8"?>
+<install type="module" version="1.5.0">
+	<name>Font Resizer</name>
+	<author>Gajendra</author>
+	<creationDate>August 2010</creationDate>
+	<copyright></copyright>
+	<license></license>
+	<authorEmail></authorEmail>
+	<authorUrl></authorUrl>
+	<version>1.5.0</version>
+	<description>This module used for font resizing.</description>
+	<files>
+		<filename module="mod_iid_fontresize">mod_iid_fontresize.php</filename>
+		<filename>tmpl/default.php</filename>
+		<filename>tmpl/index.html</filename>
+		<filename>img/minus.png</filename>
+		<filename>img/plus.png</filename>
+		<filename>img/reset.png</filename>
+		<filename>img/index.html</filename>
+		<filename>js/md_stylechanger.js</filename>
+		<filename>js/index.html</filename>
+	</files>
+	<params>
+		<param name="defaultsizefront" type="text" default="3" label="Default size for front page" description="Default size for front page" size="10" />
+		<param name="defaultsizeinner" type="text" default="3" label="Default size for inner page" description="Default size for inner page" size="10" />
+		<param name="maxsizefront" type="text" default="3" label="Max size for front page" description="Max size for front page" size="10" />
+		<param name="maxsizeinner" type="text" default="3" label="Max size for inner page" description="Max size for inner page" size="10" />
+		<param name="minsizefront" type="text" default="3" label="Min size for front page" description="Min size for front page" size="10" />
+		<param name="minsizeinner" type="text" default="3" label="Min size for inner page" description="Min size for inner page" size="10" />
+		<param name="typefront" type="text" default="3" label="Type for front page" description="Type for front page" size="10" />
+		<param name="typeinner" type="text" default="3" label="Type for inner page" description="Type for inner page" size="10" />
+	</params>
+	
+</install>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install type="component" version="1.5.0" method="upgrade">
+    <name>homegallery</name>
+    <author>Gajendra Kumar Jain</author>
+    <creationDate>09/11/2010</creationDate>
+    <license>GNU/GPL</license>
+    <version>1.0</version>
+    <description>This component used for creating home gallery.</description>
+
+    <!-- installation part -->
+    <install>
+		<queries>
+			<query>
+			DROP TABLE IF EXISTS `#__homegallery` 
+			</query>
+		<query>
+           CREATE TABLE IF NOT EXISTS `#__homegallery` (
+		  `id` int(11) NOT NULL AUTO_INCREMENT,
+		  `homegallery_title` varchar(255) DEFAULT NULL,
+		  `homegallery_discription` varchar(255) DEFAULT NULL,
+		  `logo_image` varchar(255) DEFAULT NULL,
+		  `website_url` varchar(255) DEFAULT NULL,
+		  `description` text,
+		  `created_by` int(11) DEFAULT NULL,
+		  `created_date` datetime DEFAULT NULL,
+		  `last_update` datetime DEFAULT NULL,
+		  `hits` int(11) DEFAULT '0',
+		  `published` tinyint(1) unsigned NOT NULL,
+		  `checked_out` int(11) unsigned NOT NULL,
+		  `chedked_out_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+		  `ordering` int(11) NOT NULL,
+		  `slide_text` text,
+		  `new_window` tinyint(11) NOT NULL,
+		  PRIMARY KEY (`id`)
+		) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+		</query>
+        </queries>
+    </install>
+	
+
+    <installfile>install.homegallery.php</installfile>
+    <uninstallfile>uninstall.homegallery.php</uninstallfile>
+
+    <!-- user part -->
+    <files folder="components/com_homegallery">
+        <filename>controller.php</filename>
+        <filename>index.html</filename>
+        <filename>router.php</filename>
+        <filename>homegallery.php</filename>
+        <folder>models</folder>
+        <folder>views</folder>
+    </files>
+
+    <languages folder="language/en-GB">
+        <language tag="en-GB">en-GB.com_homegallery.ini</language>
+    </languages>
+
+    <!-- administration part -->
+    <administration>
+
+    <menu task="default" img="js/ThemeOffice/component.png">homegallery</menu>
+    <submenu>
+        <menu link="option=com_homegallery">homegallery</menu>
+    </submenu>
+
+    <files>
+        <filename>homegallery.xml</filename>
+    </files>
+    <files folder="administrator/components/com_homegallery">
+        <filename>config.xml</filename>
+        <filename>controller.php</filename>
+        <filename>index.html</filename>
+        <filename>install.homegallery.php</filename>
+        <filename>homegallery.php</filename>
+		<filename>homegallery.xml</filename>
+		<filename>homegallery.defines.php</filename>
+        <filename>uninstall.homegallery.php</filename>
+        <folder>helpers</folder>
+        <folder>models</folder>
+        <folder>tables</folder>
+        <folder>views</folder>
+		<folder>assets</folder>
+		<folder>controllers</folder>
+    </files>
+
+    <languages folder="administrator/language/en-GB">
+        <language tag="en-GB">en-GB.com_homegallery.menu.ini</language>
+        <language tag="en-GB">en-GB.com_homegallery.ini</language>
+    </languages>
+
+    </administration>
+
+    <params>
+
+    </params>
+
+</install>

@@ -1,0 +1,202 @@
+<?xml version="1.5" encoding="utf-8"?>
+<install type="component" version="1.5.0" method="upgrade">
+    <name>survey</name>
+    <author>kailash pathak</author>
+    <creationDate>04/11/2010</creationDate>
+    <license>GNU/GPL</license>
+    <version>2.0</version>
+    <description>It creates a survey manager component</description>
+
+    <!-- installation part -->
+    <install>
+        <queries>
+               <query>
+						DROP TABLE IF EXISTS `#__captcha` 
+			   </query>
+			    <query>
+							CREATE TABLE `jos_captcha` (
+  `id` int(11) NOT NULL auto_increment,
+  `captcha_value` varchar(255) NOT NULL,
+  `captcha_hash` varchar(255) NOT NULL,
+  `created` datetime NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+			   </query>
+			   
+			   
+			   <query>
+			    DROP TABLE IF EXISTS `#__survey` 
+			   </query>
+			   <query>
+						CREATE TABLE `#__survey` (
+  `id` int(11) NOT NULL auto_increment,
+  `title` varchar(255) NOT NULL,
+  `header_descriptions` text NOT NULL,
+  `footer_descriptions` text NOT NULL,
+  `created` datetime NOT NULL,
+  `created_by` int(11) NOT NULL,
+  `modified` datetime NOT NULL,
+  `modified_by` int(11) NOT NULL,
+  `checked_out` int(11) NOT NULL,
+  `checked_out_time` datetime NOT NULL,
+  `published` tinyint(1) NOT NULL,
+  `ordering` int(11) NOT NULL,
+  `archive` int(11) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+			   </query>
+			  
+<query>
+	 DROP TABLE IF EXISTS `#__survey_answer` 
+</query>
+
+<query>
+CREATE TABLE `#__survey_answer` (
+  `id` int(11) NOT NULL auto_increment,
+  `survey_id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `ipaddress` varchar(255) NOT NULL,
+  `browser` text NOT NULL,
+  `created` datetime NOT NULL,
+  `created_by` int(11) NOT NULL,
+  `modified` datetime NOT NULL,
+  `modified_by` int(11) NOT NULL,
+  `checked_out` int(11) NOT NULL,
+  `checked_out_time` datetime NOT NULL,
+  `published` tinyint(1) NOT NULL,
+  `ordering` int(11) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+</query>
+
+<query>
+ DROP TABLE IF EXISTS `#__survey_answer_details` 
+</query>
+
+<query>
+CREATE TABLE `#__survey_answer_details` (
+  `id` int(11) NOT NULL auto_increment,
+  `survey_id` int(11) NOT NULL,
+  `survey_answer_id` int(11) NOT NULL,
+  `survey_question_id` int(11) NOT NULL,
+  `answer` text NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+</query>
+			   
+			   <query>
+    		         DROP TABLE IF EXISTS `#__survey_questions` 
+		      </query>
+			  <query>
+			       CREATE TABLE `#__survey_questions` (
+  `id` int(11) NOT NULL auto_increment,
+  `survey_id` int(11) NOT NULL,
+  `question_description` text NOT NULL,
+  `answer_type` varchar(255) NOT NULL,
+  `answer_options` varchar(255) NOT NULL,
+  `created` datetime NOT NULL,
+  `created_by` int(11) NOT NULL,
+  `modified` datetime NOT NULL,
+  `modified_by` int(11) NOT NULL,
+  `checked_out` int(11) NOT NULL,
+  `checked_out_time` datetime NOT NULL,
+  `published` tinyint(1) NOT NULL,
+  `ordering` int(11) NOT NULL,
+  `archive` int(11) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+	         </query>
+			 
+			 <query>
+		  					DROP TABLE IF EXISTS `#__survey_configuration`
+			</query>
+			<query>
+			 				CREATE TABLE `#__survey_configuration` (
+  `id` int(11) NOT NULL auto_increment,
+  `email` text NOT NULL,
+  `thankmessage` text NOT NULL,
+  `created` datetime NOT NULL,
+  `created_by` int(11) NOT NULL,
+  `modified` datetime NOT NULL,
+  `modified_by` int(11) NOT NULL,
+  `checked_out` int(11) NOT NULL,
+  `checked_out_time` datetime NOT NULL,
+  `published` tinyint(1) NOT NULL,
+  `ordering` int(11) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+			</query>
+			<query>
+				INSERT INTO `#__survey_configuration` (`id`, `email`, `thankmessage`, `created`, `created_by`, `modified`, `modified_by`, `checked_out`, `checked_out_time`, `published`, `ordering`) VALUES 
+(1, 'pathak27@gmail.com', 'thanks for giving test we will contact you soon hiiii', '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0, 0, '0000-00-00 00:00:00', 0, 1);
+
+			</query>
+        </queries>
+    </install>
+
+    <installfile>install.survey.php</installfile>
+    <uninstallfile>uninstall.survey.php</uninstallfile>
+
+    <!-- user part -->
+    <files folder="components/com_survey">
+        <filename>controller.php</filename>
+        <filename>index.html</filename>
+        <filename>survey.php</filename>
+        <folder>models</folder>
+        <folder>views</folder>
+		<folder>images</folder>
+		<folder>captcha</folder>
+		
+    </files>
+
+    <languages folder="language/en-GB">
+        <language tag="en-GB">en-GB.com_survey.ini</language>
+    </languages>
+
+    <!-- administration part -->
+    <administration>
+
+    <menu task="default" img="js/ThemeOffice/component.png">Web Survey</menu>
+    <submenu>
+        <menu link="option=com_survey">Survey Manager</menu>
+    </submenu>
+
+    <files>
+        <filename>survey.xml</filename>
+    </files>
+    <files folder="administrator/components/com_survey">
+        <filename>config.xml</filename>
+        <filename>controller.php</filename>
+        <filename>index.html</filename>
+        <filename>install.survey.php</filename>
+        <filename>survey.php</filename>
+		<filename>survey.defines.php</filename>
+        <filename>uninstall.survey.php</filename>
+        <folder>helpers</folder>
+        <folder>models</folder>
+        <folder>tables</folder>
+        <folder>views</folder>
+		<folder>controllers</folder>
+		<folder>jscalendar</folder>
+		<folder>assets</folder>
+		<folder>images</folder>
+  </files>
+
+    <languages folder="administrator/language/en-GB">
+        <language tag="en-GB">en-GB.com_survey.menu.ini</language>
+        <language tag="en-GB">en-GB.com_survey.ini</language>
+    </languages>
+
+    </administration>
+
+    <params>
+
+    </params>
+
+</install>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install type="component" version="1.5.0" method="upgrade">
+    <name>News</name>
+    <author>Diwakar Kumar Singh</author>
+    <creationDate>07/06/2010</creationDate>
+    <license>GNU/GPL</license>
+    <version>2.0</version>
+    <description>The news component allows the administrator to maintain news items separately from articles.</description>
+
+    <!-- installation part -->
+   <install>
+        <queries>
+		      <query>
+    		         DROP TABLE IF EXISTS `#__news` 
+		      </query>
+           	<query>
+	  		CREATE TABLE IF NOT EXISTS `#__news` (
+			  `id` int(11) NOT NULL auto_increment,
+			  `news_title` varchar(255) default NULL,
+			  `short_description` text,
+			  `contact_person` varchar(50) NOT NULL,
+			  `contact_title` varchar(50) NOT NULL,
+			  `address_line1` varchar(50) NOT NULL,
+			  `address_line2` varchar(50) default NULL,
+			  `city` varchar(50) NOT NULL,
+			  `state` varchar(20) NOT NULL,
+			  `zip_code` int(11) NOT NULL,
+			  `phone` varchar(20) default NULL,
+			  `email` varchar(50) default NULL,
+			  `description` text NOT NULL,
+			  `logo_image` longblob NOT NULL,
+			  `website_url` varchar(255) default NULL,
+			  `news_layout` tinyint(1) NOT NULL default '1',
+			  `created_by` int(11) default NULL,
+			  `created_date` date default NULL,
+			  `last_update` date default NULL,
+			  `hits` int(11) default '0',
+			  `file_name` varchar(50) NOT NULL,
+			  `file_type` varchar(50) NOT NULL,
+			  `file_size` int(11) NOT NULL default '0',
+			  `file_width` int(11) NOT NULL default '0',
+			  `file_height` int(11) NOT NULL default '0',
+			  `publish_frontpage` tinyint(1) unsigned NOT NULL,
+			  `published` tinyint(1) unsigned NOT NULL default '1',
+			  `checked_out` int(11) unsigned NOT NULL,
+			  `chedked_out_time` datetime NOT NULL default '0000-00-00 00:00:00',
+			  `ordering` int(11) NOT NULL,
+			  PRIMARY KEY  (`id`)
+			) ENGINE=MyISAM;
+
+
+
+		</query>
+		
+     </queries>
+    </install>
+    <installfile>install.news.php</installfile>
+    <uninstallfile>uninstall.news.php</uninstallfile>
+    <!-- user part -->
+    <files folder="components/com_news">
+        <filename>controller.php</filename>
+        <filename>index.html</filename>
+        <filename>router.php</filename>
+        <filename>news.php</filename>
+        <folder>models</folder>
+        <folder>views</folder>
+		<folder>tables</folder>
+		<folder>jscalendar</folder>
+		<folder>images</folder>
+    </files>
+
+    <languages folder="language/en-GB">
+        <language tag="en-GB">en-GB.com_news.ini</language>
+    </languages>
+
+    <!-- administration part -->
+    <administration>
+
+    <menu task="default" img="js/ThemeOffice/component.png">News</menu>
+    <submenu>
+        <menu link="option=com_news">News</menu>
+    </submenu>
+
+    <files>
+        <filename>news.xml</filename>
+    </files>
+    <files folder="administrator/components/com_news">
+        <filename>config.xml</filename>
+        <filename>controller.php</filename>
+        <filename>index.html</filename>
+        <filename>install.news.php</filename>
+        <filename>news.defines.php</filename>
+		 <filename>news.php</filename>
+        <filename>uninstall.news.php</filename>
+		<folder>controllers</folder>
+        <folder>helpers</folder>
+		<folder>assets</folder>
+        <folder>models</folder>
+        <folder>tables</folder>
+        <folder>views</folder>
+		<folder>jscalendar</folder>
+    </files>
+
+    <languages folder="administrator/language/en-GB">
+        <language tag="en-GB">en-GB.com_news.menu.ini</language>
+        <language tag="en-GB">en-GB.com_news.ini</language>
+    </languages>
+
+    </administration>
+
+    <params>
+
+    </params>
+
+</install>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE install PUBLIC "-//Joomla! 1.5//DTD template 1.0//EN" "http://www.joomla.org/xml/dtd/1.5/template-install.dtd">
+<install version="1.5" type="template">
+	<name>iid_home</name>
+	<creationDate>1/11/2010</creationDate>
+	<author>Gajendra Kumar Jain</author>
+	<authorEmail>gajendra.jain@comnez.com</authorEmail>
+	<copyright></copyright>
+	<license>GNU/GPL</license>
+	<version>1.0.2</version>
+	<description>iid_home</description>
+	<files>
+		<filename>index.php</filename>
+		<filename>templateDetails.xml</filename>
+		<filename>index.html</filename>
+		<filename>css/index.html</filename>
+		<filename>css/template.css</filename>
+		<filename>images/index.html</filename>
+		<filename>images/button_bottom.png</filename>
+		<filename>images/button_middle.png</filename>
+		<filename>images/button_top.png</filename>
+		<filename>images/line.png</filename>
+		<filename>images/logo.png</filename>
+		<filename>images/paneltop.png</filename>
+		<filename>images/paneltop2.png</filename>
+		<filename>images/paneltop3.png</filename>
+		<filename>images/pannelbottom.png</filename>
+		<filename>images/pannelbottom2.png</filename>
+		<filename>images/pannelbottom3.png</filename>
+		<filename>images/pannelcenter.png</filename>
+		<filename>images/pannelcenter2.png</filename>
+		<filename>images/pannelcenter3.png</filename>
+		<filename>images/pollbottom.png</filename>
+		<filename>images/pollimage.png</filename>
+		<filename>images/pollrepeat.png</filename>
+		<filename>images/polltop.png</filename>
+		<filename>images/search_button.png</filename>
+		<filename>images/serach_text.png</filename>
+		<filename>images/tab1.png</filename>
+		<filename>images/tab2.png</filename>
+		<filename>images/tab3.png</filename>
+		<filename>images/video_image.png</filename>
+		<filename>images/video_top.png</filename>
+		<filename>images/Waves.gif</filename>
+		<filename>images/banner_image.png</filename>
+		<filename>images/button1.png</filename>
+		<filename>images/button2.png</filename>
+		<filename>images/button3.png</filename>
+		<filename>images/logo1.png</filename>
+		<filename>images/logo2.png</filename>
+		<filename>images/logo3.png</filename>
+		<filename>images/logo4.png</filename>
+		<filename>images/logo5.png</filename>
+		<filename>images/logo6.png</filename>
+	</files>
+</install>
